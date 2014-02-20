@@ -1,0 +1,19 @@
+{
+  "name": "js-classification",
+  "description": "Various classification algorithms",
+  "author" : "Ryan Mack <rmack005@gmail.com>",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main" : "index",
+  "private": true,
+  "dependencies": {
+	"lodash": ">= 2.4.1"
+  },
+  "devDependencies": {
+	"mocha": ">= 1.16.2",
+    "chai": ">= 1.8.1"
+  },
+  "scripts": {
+	"test": "make test/*.js"
+  }
+}
