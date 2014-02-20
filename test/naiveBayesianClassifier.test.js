@@ -35,8 +35,7 @@ describe('naiveBayesianClassifier',function() {
 				classifier.train(category, document);
 			};
 			
-			expect(fn).to.not.throw("A category must be provided")
-				.and.not.throw("A document must be provided");
+			expect(fn).to.not.throw(classifier.ClassificationError);
 		});
 	});
 	
