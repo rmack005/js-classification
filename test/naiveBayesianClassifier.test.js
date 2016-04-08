@@ -1,21 +1,22 @@
+/* jshint node: true, esversion: 6, mocha:true */
 "use strict";
 
-var expect = require('chai').expect;
-var naiveBayesianClassifier = require('../lib/naiveBayesianClassifier');
-var featureExtraction = require('../lib/featureExtraction');
+const expect = require('chai').expect;
+const naiveBayesianClassifier = require('../lib/naiveBayesianClassifier');
+const featureExtraction = require('../lib/featureExtraction');
 
 describe('naiveBayesianClassifier',function() { 	
 	describe('train',function() {
-		var classifier = naiveBayesianClassifier.create();
-		var document = "This is a test document";
-		var category = "spam";
+		const classifier = naiveBayesianClassifier.create();
+		const document = "This is a test document";
+		const category = "spam";
 		
 		it('should be a defined function', function() {
 			expect(classifier.train).to.be.a('function');
 		});
 
 		it('should throw an exception if a category is not provided', function() {
-			var fn = function(){
+			const fn = function(){
 				classifier.train(null, document);
 			};
 			
@@ -23,7 +24,7 @@ describe('naiveBayesianClassifier',function() {
 		});
 		
 		it('should throw an exception if a document is not provided', function() {
-			var fn = function(){
+			const fn = function(){
 				classifier.train(category, null);
 			};
 			
@@ -31,7 +32,7 @@ describe('naiveBayesianClassifier',function() {
 		});
 		
 		it('should not throw an exception if a category and document are provided', function() {
-			var fn = function(){
+			const fn = function(){
 				classifier.train(category, document);
 			};
 			
@@ -40,21 +41,21 @@ describe('naiveBayesianClassifier',function() {
 	});
 	
 	describe('classify',function() {
-		var classifier = naiveBayesianClassifier.create({
+		const classifier = naiveBayesianClassifier.create({
 			featureExtractor: featureExtraction.whiteSpaceFeatureExtractor.stopWordsFilter()
 		});
 		
-		var spamDocument = "This is a spam message";
-		var hamDocument = "This is a ham message";
-		var spamCategory = "spam";
-		var hamCategory = "ham";
+		const spamDocument = "This is a spam message";
+		const hamDocument = "This is a ham message";
+		const spamCategory = "spam";
+		const hamCategory = "ham";
 		
 		it('should be a defined function', function() {
 			expect(classifier.classify).to.be.a('function');
 		});
 		
 		it('should throw an exception if a document is not provided', function() {
-			var fn = function(){
+			const fn = function(){
 				classifier.classify(null);
 			};
 			
@@ -62,8 +63,8 @@ describe('naiveBayesianClassifier',function() {
 		});
 		
 		it('should not throw an exception if a document is provided', function() {
-			var fn = function(){
-				var result = classifier.classify(spamDocument);
+			const fn = function(){
+				classifier.classify(spamDocument);
 			};
 			
 			expect(fn).to.not.throw("A document must be provided");
@@ -75,8 +76,8 @@ describe('naiveBayesianClassifier',function() {
 				classifier.train(hamCategory, hamDocument);
 			}
 			
-			var spamResult = classifier.classify("is this a spam message");
-			var hamResult = classifier.classify("is this a ham message") || "ham";
+			const spamResult = classifier.classify("is this a spam message");
+			const hamResult = classifier.classify("is this a ham message") || "ham";
 			
 			expect(spamResult).to.equal("spam");
 			expect(hamResult).to.equal("ham");

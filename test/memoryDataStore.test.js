@@ -1,17 +1,18 @@
+/* jshint node: true, esversion: 6, mocha:true */
 "use strict";
 
-var _ = require('lodash');
-var expect = require('chai').expect;
-var memoryDataStore = require('../lib/memoryDataStore');
+const _ = require('lodash');
+const expect = require('chai').expect;
+const memoryDataStoreFactory = require('../lib/memoryDataStore');
 
 describe('memoryDataStore',function() {
 	describe('getFeatureCounts',function() {
-		var dataStore = memoryDataStore.create();
-		var category = "cat";
-		var features = [{feature: "feature1", count: 1}, {feature: "feature2", count: 1}];
+		const dataStore = memoryDataStoreFactory();
+		const category = "cat";
+		const features = [{feature: "feature1", count: 1}, {feature: "feature2", count: 1}];
 		
 		dataStore.incrementFeatureCounts(category, features);
-		var collection = dataStore.getFeatureCounts(_.map(features, function(item) {
+		const collection = dataStore.getFeatureCounts(_.map(features, function(item) {
 				return item.feature;
 		}));
 		
@@ -22,17 +23,17 @@ describe('memoryDataStore',function() {
 		});
 		
 		it('should return the correct feature count', function() {
-			var result = collection.getFeatureCount("feature1", category);
+			const result = collection.getFeatureCount("feature1", category);
 			expect(result).to.equal(1);
 		});
 	});
 	
 	describe('getCategoryCounts',function() {
-		var dataStore = memoryDataStore.create();
-		var category = "cat";
+		const dataStore = memoryDataStoreFactory();
+		const category = "cat";
 		
 		dataStore.incrementCategoryCount(category);
-		var collection = dataStore.getCategoryCounts();
+		const collection = dataStore.getCategoryCounts();
 		
 		it('should return an object with the expected properties', function() {
 			expect(collection).to.have.property('incrementCategoryCount');
@@ -42,7 +43,7 @@ describe('memoryDataStore',function() {
 		});
 			
 		it('should return the correct counts', function() {
-			var count = collection.getCategoryCount(category);
+			const count = collection.getCategoryCount(category);
 			expect(count).to.equal(1);			
 		});
 	});

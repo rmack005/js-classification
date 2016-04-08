@@ -1,15 +1,16 @@
+/* jshint node: true, esversion: 6, mocha:true */
 "use strict";
 
-var expect = require('chai').expect;
-var categoryCollection = require('../lib/categoryCollection.js');
+const expect = require('chai').expect;
+const categoryCollectionFactory = require('../lib/categoryCollection.js');
 
 describe('categoryCollection',function() {
-	var collection = categoryCollection.create();
+	const collection = categoryCollectionFactory();
 	
 	describe('incrementCategoryCount',function() {	
 		collection.incrementCategoryCount("c1", 3);
 		collection.incrementCategoryCount("c1", 1);
-		var count = collection.getCategoryCount("c1");
+		const count = collection.getCategoryCount("c1");
 		
 		it('should increment the category count', function() {
 			expect(count).to.equal(4);
@@ -22,7 +23,7 @@ describe('categoryCollection',function() {
 		collection.incrementCategoryCount("c2", 2);
 		collection.incrementCategoryCount("c2", 2);
 		
-		var array = collection.toArray();
+		const array = collection.toArray();
 		
 		it('should return all the category counts', function() {
 			expect(array).to.have.length(2);
@@ -30,7 +31,7 @@ describe('categoryCollection',function() {
 	});
 	
 	describe('sumAllCategoryCounts',function() {		
-		var sum = collection.sumAllCategoryCounts();
+		const sum = collection.sumAllCategoryCounts();
 		
 		it('should return the sum of all the category counts', function() {
 			expect(sum).to.equal(10);

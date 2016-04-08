@@ -1,15 +1,16 @@
+/* jshint node: true, esversion: 6, mocha:true */
 "use strict";
 
-var expect = require('chai').expect;
-var featureCollection = require('../lib/featureCollection.js');
+const expect = require('chai').expect;
+const featureCollectionFactory = require('../lib/featureCollection.js');
 
 describe('featureCollection',function() {
-	var collection = featureCollection.create();
+	const collection = featureCollectionFactory();
 	
 	describe('incrementFeatureCount',function() {	
 		collection.incrementFeatureCount("f1", "c1", 3);
 		collection.incrementFeatureCount("f1", "c1", 1);
-		var count = collection.getFeatureCount("f1", "c1");
+		const count = collection.getFeatureCount("f1", "c1");
 		
 		it('should increment the feature count', function() {
 			expect(count).to.equal(4);
@@ -22,8 +23,8 @@ describe('featureCollection',function() {
 		collection.incrementFeatureCount("f3", "c2", 2);
 		collection.incrementFeatureCount("f5", "c2", 2);
 		
-		var arrayC1 = collection.toArray("c1");
-		var arrayC2 = collection.toArray("c2");
+		const arrayC1 = collection.toArray("c1");
+		const arrayC2 = collection.toArray("c2");
 		
 		it('should return all the feature counts for a given category', function() {
 			expect(arrayC1).to.have.length(2);

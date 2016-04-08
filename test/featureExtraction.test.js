@@ -1,7 +1,8 @@
+/* jshint node: true, esversion: 6, mocha:true */
 "use strict";
 
-var expect = require('chai').expect;
-var featureExtraction = require('../lib/featureExtraction');
+const expect = require('chai').expect;
+const featureExtraction = require('../lib/featureExtraction');
 
 
 describe('featureExtraction',function() {
@@ -26,7 +27,7 @@ describe('featureExtraction',function() {
 			expect(featureExtraction.whiteSpaceFeatureExtractor.stopWordsFilter).to.be.a('function');
 		});
 		
-		var result = featureExtraction.whiteSpaceFeatureExtractor("This is a	test-case1");
+		const result = featureExtraction.whiteSpaceFeatureExtractor("This is a	test-case1");
 		
 		it('should split a string on whitespace', function() {
 			expect(result).to.be.an.instanceof(Array);
@@ -56,7 +57,7 @@ describe('featureExtraction',function() {
 			expect(featureExtraction.wordBreakFeatureExtractor.stopWordsFilter).to.be.a('function');
 		});
 		
-		var result = featureExtraction.wordBreakFeatureExtractor("This is a		test_case1#test-case2");
+		const result = featureExtraction.wordBreakFeatureExtractor("This is a		test_case1#test-case2");
 		
 		it('should split a string on word breaks', function() {
 			expect(result).to.be.an.instanceof(Array);
@@ -86,7 +87,7 @@ describe('featureExtraction',function() {
 			expect(featureExtraction.nonLetterNumberApostropheHyphenDollarFeatureExtractor.stopWordsFilter).to.be.a('function');
 		});
 		
-		var result = featureExtraction.nonLetterNumberApostropheHyphenDollarFeatureExtractor("it's another		test_case1#test-case2");
+		const result = featureExtraction.nonLetterNumberApostropheHyphenDollarFeatureExtractor("it's another		test_case1#test-case2");
 		
 		it('should split a string correctly', function() {
 			expect(result).to.be.an.instanceof(Array);
@@ -96,8 +97,8 @@ describe('featureExtraction',function() {
 	});
 	
 	describe('slidingWindow',function() {
-		var featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.slidingWindow(4);
-		var result = featureExtractor("The sliding window test case");
+		const featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.slidingWindow(4);
+		const result = featureExtractor("The sliding window test case");
 		
 		it('should tokenize a string correctly', function() {
 			expect(result).to.be.an.instanceof(Array);
@@ -113,8 +114,8 @@ describe('featureExtraction',function() {
 	});
 	
 	describe('lowerCaseFilter',function() {
-		var featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.lowerCaseFilter();
-		var result = featureExtractor("The lowerCaseFilter test case");
+		const featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.lowerCaseFilter();
+		const result = featureExtractor("The lowerCaseFilter test case");
 		
 		it('should tokenize a string correctly', function() {
 			expect(result).to.be.an.instanceof(Array);
@@ -124,8 +125,8 @@ describe('featureExtraction',function() {
 	});
 	
 	describe('reJoinHyphenSplitWords',function() {
-		var featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.reJoinHyphenSplitWords();
-		var result = featureExtractor("The reJoinHyphenSplitWords test case with hy-\r\nphenated word");
+		const featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.reJoinHyphenSplitWords();
+		const result = featureExtractor("The reJoinHyphenSplitWords test case with hy-\r\nphenated word");
 		
 		it('should tokenize a string correctly', function() {
 			expect(result).to.be.an.instanceof(Array);
@@ -135,8 +136,8 @@ describe('featureExtraction',function() {
 	});
 	
 	describe('stopWordsFilter',function() {
-		var featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.stopWordsFilter();
-		var result = featureExtractor("the stopWordsFilter should remove any stop words because that's what it's supposed to do.");
+		const featureExtractor = featureExtraction.whiteSpaceFeatureExtractor.stopWordsFilter();
+		const result = featureExtractor("the stopWordsFilter should remove any stop words because that's what it's supposed to do.");
 		
 		it('should remove any stop words', function() {
 			expect(result).to.be.an.instanceof(Array);
