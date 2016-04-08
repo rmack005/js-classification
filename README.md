@@ -12,4 +12,4 @@ To use: obtain the source, navigate to the directory containing the source, and 
 	
 To run the tests, navigate to the directory containing the source and run:
 
-	mocha
+	npm test
